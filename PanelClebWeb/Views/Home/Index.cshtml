@@ -1,0 +1,33 @@
+﻿@using EntityLayer.Concrete
+@model List<LogEntry>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    var botStatus = ViewBag.BotStatus;
+
+}
+
+<div class="col-12 mt-2">
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-2">
+                    <p>
+                        @if (@botStatus)
+                        {
+                            <h5>Bot Durumu: <span class="badge badge-success">Aktif <i class="fa fa-check-circle"></i></span></h5>
+                        }
+                        else
+                        {
+                            <h5>Bot Durumu: <span class="badge badge-danger">Pasif <i class="fa fa-times-circle"></i></span></h5>
+                        }
+                    </p>
+                </div>
+            </div>
+
+        </div>
+        <div class="card-body">
+        </div>
+    </div>
+</div>
+

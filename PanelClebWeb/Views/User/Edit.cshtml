@@ -1,0 +1,64 @@
+﻿@model PanelClebWeb.Models.UserEditViewModel
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="col-12 mt-2">
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-6">
+                    <h3 class="card-title">Kullanıcı ekle</h3>
+                </div>
+                <div class="col-md-6 text-right">
+                    <a class="btn btn-primary" href="/User/" style="width:150px;">Geri</a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body table-responsive p-0">
+            <form method="post" action="/User/Edit/">
+                <input type="hidden" asp-for="Id" class="form-control" id="myinput" />
+                <div class="row m-2">
+                    <div class="col-md-6">
+                        <label class="form-control">İsim Soyisim:</label>
+                        <input type="text" asp-for="FullName" class="form-control" id="myinput" />
+                        <span asp-validation-for="FullName" class=" text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-control">Kullanıcı adı:</label>
+                        <input type="text" asp-for="UserName" class="form-control" id="myinput" />
+                        <span asp-validation-for="UserName" class="text-danger"></span>
+
+                    </div>
+                    <div class="col-md-6 mt-2">
+                        <label class="form-control">Email:</label>
+                        <input type="text" asp-for="Email" class="form-control" id="myinput" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6 mt-2">
+                        <label class="form-control">Eski Şifre:</label>
+                        <input type="password" asp-for="OldPassword" class="form-control" id="myinput" />
+                        <span asp-validation-for="OldPassword" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6 mt-2">
+                        <label class="form-control">Yeni Şifre:</label>
+                        <input type="password" asp-for="NewPassword" class="form-control" id="myinput" />
+                        <span asp-validation-for="NewPassword" class="text-danger"></span>
+
+                    </div>
+                    <div class="col-md-6 mt-2">
+                        <label class="form-control">Yeni Şifre Tekrar:</label>
+                        <input type="password" asp-for="NewPasswordConfirm" class="form-control" id="myinput" />
+                        <span asp-validation-for="NewPasswordConfirm" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-12 mt-2 text-center">
+                        <button type="submit" class="btn btn-success btn-l" style="width:150px;">Düzenle </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,131 @@
+﻿@model X.PagedList.IPagedList<EntityLayer.Concrete.Product>
+@using X.PagedList.Mvc.Core
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="col-12 mt-2">
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2 class="card-title text-danger">Ürünler</h2>
+                </div>
+                <div class="col-md-6 text-right">
+                    <button class="btn btn-primary btn-s">Pasif Ürünler</button>
+                    <a class="btn btn-success" href="/Product/Create" style="width:150px;">Ekle</a>
+                </div>
+               
+            </div>
+        </div>
+        <div class="card-body table-responsive p-0">
+            <table class="table table-hover text-nowrap">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Link</th>
+                        <th>Güncelleme Durumu</th>
+                        <th>Son Güncelleme</th>
+                        <th>Barkodlar</th>
+                        <th>Adetler</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="toggle-row"><i class="right fas fa-angle-right"></i></td>
+                            <td><a href="@item.Url">@item.Url.Split('/').Last()</a></td>
+                            <td>
+                                @if (item.UpdateStatus == true)
+                                {
+                                    <span class="btn btn-success">Aktif</span>
+                                }
+                                else
+                                {
+                                    <span class="btn btn-danger">Pasif</span>
+                                }
+                            </td>
+                            <td>
+                                @item.LastUpdate.ToShortDateString()
+                            </td>
+                            <td>
+                                @if (!string.IsNullOrEmpty(item.Barcodes) && item.Barcodes.Contains(","))
+                                {
+                                    var barcodeParts = item.Barcodes.Split(',');
+                                    var firstBarcode = barcodeParts[0].Trim();
+                                    var remainingBarcodes = barcodeParts.Skip(1).ToArray();
+                                    var containerId = "barcodesContainer_" + item.ProductId;
+                                    <div>@firstBarcode</div>
+                                    <div id="@containerId" class="remaining-barcodes" style="display:none;">
+                                        @for (int i = 0; i < remainingBarcodes.Length; i++)
+                                        {
+                                            <div>@remainingBarcodes[i].Trim()</div>
+                                        }
+                                    </div>
+                                   
+                                }
+                                else
+                                {
+                                    <div>@item.Barcodes</div>
+                                }
+                            </td>
+                            <td>
+                                @if (!string.IsNullOrEmpty(item.StockQuantity) && item.StockQuantity.Contains(","))
+                                {
+                                    var StockQuantityParts = item.StockQuantity.Split(',');
+                                    var firstStockQuantity = StockQuantityParts[0].Trim();
+                                    var remainingStockQuantity = StockQuantityParts.Skip(1).ToArray();
+                                    var stockContainerId = "StockContainer_" + item.ProductId;
+                                    <div>@firstStockQuantity</div>
+                                    <div id="@stockContainerId" class="remaining-barcodes" style="display:none;">
+                                        
+                                        @for (int i = 0; i < remainingStockQuantity.Length; i++)
+                                        {
+                                            <div>@remainingStockQuantity[i].Trim()</div>
+                                        }
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div>@item.StockQuantity</div>
+                                }
+                            </td>
+                            <td>
+                                <a class="btn btn-primary" href="/Product/Edit/@item.ProductId">Düzenle</a>
+                                <a class="btn btn-danger" href="/Product/Delete/@item.ProductId">Sil</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center mt-3 d-flex justify-content-center">
+                <ul class="pagination">
+                    <li class="page-item @(Model.PageNumber == 1 ? "disabled" : "")">
+                        <a class="page-link" href="@Url.Action("Index", new { page = 1 })">&laquo;&laquo;</a>
+                    </li>
+                    <li class="page-item @(Model.PageNumber == 1 ? "disabled" : "")">
+                        <a class="page-link" href="@Url.Action("Index", new { page = Model.PageNumber - 1 })">&laquo;</a>
+                    </li>
+                    @for (int i = 1; i <= Model.PageCount; i++)
+                    {
+                        <li class="page-item @(Model.PageNumber == i ? "active" : "")">
+                            <a class="page-link" href="@Url.Action("Index", new { page = i })">@i</a>
+                        </li>
+                    }
+                    <li class="page-item @(Model.PageNumber == Model.PageCount ? "disabled" : "")">
+                        <a class="page-link" href="@Url.Action("Index", new { page = Model.PageNumber + 1 })">&raquo;</a>
+                    </li>
+                    <li class="page-item @(Model.PageNumber == Model.PageCount ? "disabled" : "")">
+                        <a class="page-link" href="@Url.Action("Index", new { page = Model.PageCount })">&raquo;&raquo;</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+</div>

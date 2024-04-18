@@ -1,0 +1,51 @@
+﻿@model EntityLayer.Concrete.Expenditure
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="col-12 mt-2">
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-6">
+                    <h3 class="card-title">Ürün Alımı Düzenle</h3>
+                </div>
+                <div class="col-md-6 text-right">
+                    <a class="btn btn-primary" href="/Expenditure/" style="width:150px;">Geri</a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body table-responsive p-0">
+            <form method="post" action="/Expenditure/Edit/">
+                <input type="hidden" name="Id" value="@Model.Id" />
+                <div class="row m-2">
+                    <div class="col-md-6">
+                        <label>Ürün Adı:</label>
+                        <input class="form-control" type="text" name="ExpenditureName" value="@Model.ExpenditureName" />
+                    </div>
+                    <div class="col-md-6">
+                        <label>Ürün Tutarı:</label>
+                        <input class="form-control" type="text" name="ExpenditureAmount" value="@Model.ExpenditureAmount" />
+                    </div>
+                    <div class="col-md-6 mt-2">
+                        <label>Kasa:</label>
+                        <select class="form-control" name="SafeBoxId">
+                            <option value="">Kasa Seçiniz</option>
+                            @foreach (var safeBox in ViewBag.SafeBoxes)
+                            {
+                                <option value="@safeBox.Id" selected="@(safeBox.Id == Model.SafeBoxId)">
+                                    @safeBox.SafeBoxName
+                                </option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-md-12 mt-2 text-center">
+                        <button type="submit" class="btn btn-success btn-l" style="width:150px;">Düzenle </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

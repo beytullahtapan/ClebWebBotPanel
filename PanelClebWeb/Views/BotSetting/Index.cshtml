@@ -1,0 +1,110 @@
+﻿@model EntityLayer.Concrete.BotSetting
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="col-md-12 card mt-3">
+ <form method="post">
+    <div class="row p-2">
+           <input type="hidden" value="@Model.Id" name="Id" />
+           <div class="col-md-6">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h3 class="card-title">Stok Kontrol:</h3>
+                            </div>
+                             <div class="col-md-12">
+                                <hr />
+                                <h6 class="text-primary">Burası sadece bilgi amaçlı belirtilen kanala stokları yollar</h6>
+                             </div>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                            <div class="row m-2"> 
+                                <div class="col-md-6 mt-2">
+                                    <label >Stok Kontol Durumu:</label>
+                                   <select name="StockControlStatus" class="form-control">
+                                            <option value="True" selected=@(Model.StockControlStatus ? "selected" : null)>Aktif</option>
+                                            <option value="False" selected=@(Model.StockControlStatus ? null : "selected")>Pasif</option>
+                                    </select>
+                                </div>
+                                    <div class="col-md-6 mt-2">
+                                    <label>Stok kontrol süresi:</label>
+                                    <input class="form-control" type="text" name="StockControlTime" value="@Model.StockControlTime" />
+                                </div>
+                                <div class="col-md-6 mt-2">
+                                    <label>Stok kontrol Kanalı:</label>
+                                    <input class="form-control" type="text" name="StokControlChannel" value="@Model.StokControlChannel" />
+                                </div>
+                            </div>
+                    </div>
+           </div>
+           <div class="col-md-6">
+                    <div class="card-header">
+                       <div class="row">
+                           <div class="col-md-6">
+                               <h3 class="card-title">Stok Güncelleme:</h3>
+                           </div>
+                           <div class="col-md-12">
+                            <hr />
+                              <h6 class="text-primary">Stok kontrol pasif olsa bile güncel stokları çeker ve günceller</h6>
+                           </div>
+                       </div>
+                    </div>
+                    <div class="card-body p-0">
+                       <div class="row m-2">
+                           <div class="col-md-6 mt-2">
+                                <label>Stok güncelleme süresi:</label>
+                                <input class="form-control" type="text" name="StockUpdateTime" value="@Model.StockUpdateTime" />
+                           </div>
+                           <div class="col-md-6 mt-2">
+                                 <label>Stok güncelleme Kanalı:</label>
+                                 <input class="form-control" type="text" name="StockUpdateChannel" value="@Model.StockUpdateChannel" />
+                           </div>
+                           <div class="col-md-6 mt-2">
+                                  <label>Stok 0'lama sayısı</label>
+                                  <input class="form-control" type="text" name="StockCount" value="@Model.StockCount" />
+                           </div>
+                           <div class="col-md-6 mt-2">
+                                  <label>Stok 0'lama Aktif - Pasif</label>
+                                  <select name="StockCountStatus" class="form-control">
+                                       <option value="True" selected=@(Model.StockCountStatus ? "selected" : null)>Aktif</option>
+                                       <option value="False" selected=@(Model.StockCountStatus ? null : "selected")>Pasif</option>
+                                  </select>
+                           </div>
+                       </div>
+                    </div>
+                    
+           </div>
+           <div class="col-md-12">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h3 class="card-title">Api Bilgileri:</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="row m-2">
+                            <div class="col-md-12 mt-2">
+                                <label>Satıcı ID:</label>
+                                <input class="form-control" type="text" name="SupplerId" value="@Model.SupplerId" />
+                            </div>
+                            <div class="col-md-6 mt-2">
+                                <label>Api Key:</label>
+                                <input class="form-control" type="text" name="apiKey" value="@Model.apiKey" />
+                            </div>
+                            <div class="col-md-6 mt-2">
+                                <label>Api Secret Key:</label>
+                                <input class="form-control" type="text" name="apiSecret" value="@Model.apiSecret" />
+                            </div>
+                        </div>
+                    </div>
+           </div>
+         <div class="col-md-12 mt-2 text-center">
+                <button type="submit" class="btn btn-success btn-l" style="width:150px;">Düzenle </button>
+         </div>
+   </div>
+  </form>
+</div>

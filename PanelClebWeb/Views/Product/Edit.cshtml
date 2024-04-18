@@ -1,0 +1,43 @@
+﻿@model EntityLayer.Concrete.Product
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="col-12 mt-2">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title text-danger">Ürünler ve barkodlar</h3>
+        </div>
+        <div class="card-body table-responsive p-0">
+            <form method="post" action="/Product/Edit/">
+                <div class="row m-2">
+                    <input type="hidden" name="ProductId" value="@Model.ProductId" />
+                    <div class="col-md-6">
+                        <label>Link:</label>
+                        <input class="form-control" type="text" name="Url" value="@Model.Url" />
+                    </div>
+                    <div class="col-md-6">
+                        <label>Güncelleme Durumu:</label>
+                        <select name="UpdateStatus" class="form-control">
+                            <option value="True" selected=@(Model.UpdateStatus ? "selected" : null)>Aktif</option>
+                            <option value="False" selected=@(Model.UpdateStatus ? null : "selected")>Pasif</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 mt-2">
+                        <label>Barkodlar:</label>
+                        <input class="form-control" type="text" name="Barcodes"  value="@Model.Barcodes"/>
+                    </div>
+                    <div class="col-md-6 mt-2">
+                        <label>Adetler:</label>
+                        <input class="form-control" type="text" name="StockQuantity" value="@Model.StockQuantity" />
+                    </div>
+                    <div class="col-md-12 mt-2 text-center">
+                        <button type="submit" class="btn btn-success btn-l" style="width:150px;">Düzenle </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

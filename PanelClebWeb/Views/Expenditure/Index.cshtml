@@ -1,0 +1,66 @@
+﻿@using EntityLayer.Concrete
+@model List<Expenditure>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="col-12 mt-2">
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-6">
+                    <h3 class="card-title">Ürün alımları</h3>
+                </div>
+                <div class="col-md-6 text-right">
+                    <a class="btn btn-success" href="/Expenditure/Create" style="width:150px;">Ekle</a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body table-responsive p-0">
+            <table class="table table-hover text-nowrap">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Ürün Adı</th>
+                        <th>Ürün Tutarı</th>
+                        <th>Kasa Kalan</th>
+                        <th>Kasa</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.ExpenditureName</td>
+                            <td>@item.ExpenditureAmount </td>
+                            <td>@item.SafeBoxTotal</td>
+                            <td>
+                                @{
+                                    var safeBoxName = "Not Found";
+                                    var safeBox = ViewBag.SafeBoxes as List<SafeBox>;
+                                    if (safeBox != null)
+                                    {
+                                        var matchingSafeBox = safeBox.FirstOrDefault(s => s.Id == item.SafeBoxId);
+                                        if (matchingSafeBox != null)
+                                        {
+                                            safeBoxName = matchingSafeBox.SafeBoxName;
+                                        }
+                                    }
+                                }
+                                @safeBoxName
+                            </td>
+                            <td>
+                                <a class="btn btn-primary" href="/Expenditure/Edit/@item.Id">Düzenle</a>
+                                <a class="btn btn-danger" href="/Expenditure/Delete/@item.Id">Sil</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
